@@ -9,7 +9,12 @@ function App() {
       .then((data) => setBacon(data));
   }, []);
 
-  return <div>{avocado ? avocado : `...where's my stuff?...`}</div>;
+  return <div>
+    <>
+    {avocado ? avocado : `...where's my stuff?...`}
+    <p>test !</p>
+    </>
+    </div>;
 }
 
 export default App;
