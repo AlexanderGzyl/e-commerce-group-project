@@ -13,15 +13,6 @@ const options = {
 const companies = require("./data/companies.json")
 const items = require("./data/items.json")
 
-//how to organize the data
-//put data into iterable array {} to []
-// flightData = [];
-// Object.keys(flights).map((flight) => {
-//     return flightData[flightData.length]={
-//         _id: flight,
-//         seats: flights[flight]
-//     };
-// });
 
 const batchImport = async () => {
     const client = await new MongoClient(MONGO_URI, options);
