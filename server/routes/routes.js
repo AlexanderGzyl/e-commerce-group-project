@@ -8,11 +8,15 @@ const  Company = require('../models/companies')
 
   // @method GET
   // @route products/
+  // @ query page, limit
   // @desc get all products
   // _____________________________________________
   // *********************************************
   router.get('/products', (req, res) => {
+    const { page = 1, limit = 10} = req.query
     Products.find()
+      .limit(limit*1)
+      .skip((page -1) * limit)
       .then(products => {
         res.status(200).json(
           { 
