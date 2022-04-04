@@ -1,20 +1,40 @@
 import React from 'react';
 import styled from "styled-components";
-import {NavLink } from "react-router-dom";
+import Burger from './Burger';
+import { NavLink } from "react-router-dom";
+
 const Header = () => {
  return (
-  // please integrate NavLink from react-router-dom v6
-  <Nav>
-     <NavLink to='/' >Homepage</NavLink>
-     <NavLink to='/Products' >Shop</NavLink>
-     <NavLink to='/about' >About</NavLink>
-  </Nav>
+   <Nav>
+      <LogoDiv to='/'>
+         <Logo alt="logo image" src="Logo.png"></Logo>
+      </LogoDiv>
+     <Burger />
+   </Nav>
  );
 };
 
+export default Header;
+
 
 const Nav = styled.div`
-
+   display: flex;
+   justify-content: space-between;
+   width: 100%;
+   height: 55px;
+   border-bottom: 2px solid #f1f1f1;
+   padding: 0 20px;
+   background-color: var(--color-black);
 `
 
-export default Header;
+const LogoDiv = styled(NavLink)`
+   padding: 10px;
+
+   @media (max-width: 768px){
+      padding: 10px 0px;
+   }
+`;
+
+const Logo = styled.img`
+   height: 30px;
+`

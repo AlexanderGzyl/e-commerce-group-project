@@ -10,11 +10,21 @@ export default createGlobalStyle`
     // --font-heading: 'Permanent Marker', Arial, Helvetica, sans-serif;
     // --font-body: 'Kosugi', Arial, Helvetica, sans-serif;
     // --padding-page: 24px;
+    --color-black: #0B0C10;
+    --color-darkgray: #1F2833;
+    --color-lightgray:#C5C6C7;
+    --color-aquamarine: #66FCF1;
+    --color-cadetblue: #45A29E;
   }
 
   html,body {
       font-weight: bold;
       font-family: arial sans-serif;
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
   }
 
 `;
