@@ -22,7 +22,7 @@ return (
           <Route path="/about" element={<About/>}/>
           <Route path="/checkout" element={<Checkout/>} />
           <Route path="/product/:prodId" element={<Product/>}/>
-          <Route path="/Products" element={<Products/>} />
+          <Route path="/products" element={<Products/>} />
         </Routes>
     </AppWrapper>
   </>
