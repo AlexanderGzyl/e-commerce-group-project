@@ -48,7 +48,7 @@ const MenuWrapper = styled.ul`
    display: flex;
    flex-flow: row nowrap;
    list-style: none;
-
+    z-index: 20;
    li{
     padding: 18px 20px;
    }
