@@ -43,7 +43,7 @@ function handleClick(event) {
 }
 
 
-
+ // change to product id when page is made
     return(<CardWrapper to='/about'>
         <ProductImage src={product["imageSrc"]} ></ProductImage>
         <ProductName >{product["name"]}</ProductName>
