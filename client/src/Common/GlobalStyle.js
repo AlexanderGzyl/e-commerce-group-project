@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
+
 export default createGlobalStyle`
   :root {
     // --color-cadmium-red: #D80026;
@@ -18,12 +19,13 @@ export default createGlobalStyle`
   }
 
   html,body {
-      font-weight: bold;
-      font-family: arial sans-serif;
+
       * {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
+        font-weight: bold;
+        font-family: 'Open Sans', sans-serif;
       }
   }
 
