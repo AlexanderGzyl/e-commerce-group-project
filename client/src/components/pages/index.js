@@ -1,4 +1,4 @@
-import Products from './Products'
+import Products from './ProductsPage/Products'
 import Product from './Product'
 import About from './About'
 import Homepage from './Homepage'

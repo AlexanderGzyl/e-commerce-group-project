@@ -13,7 +13,7 @@ const productsSchema = new Schema({
    require: true
   },
   price: {
-   type: Number,
+   type: String,
    require: true
   },
   body_location: {

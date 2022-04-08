@@ -6,9 +6,9 @@ import {
 Homepage,
  About,
  Checkout,
- Product,
- Products
+ Product
 } from './pages'
+import Products from './pages/ProductsPage/Products'
 import Header from './Header/Header'
 
 const App = () => {
