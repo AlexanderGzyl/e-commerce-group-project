@@ -36,7 +36,7 @@ const Title = styled.div`
     justify-content: center;
     align-items:center;
     font-size: 26px;
-    margin-top:2%;
+    margin-top: 70px;
 `;
 
 const Cards = styled.div`
