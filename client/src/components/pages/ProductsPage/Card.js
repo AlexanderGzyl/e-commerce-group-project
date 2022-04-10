@@ -8,7 +8,13 @@ import {CartContext} from "../../../contexts/CartContext"
 //a solution would be to use useNavigate instead
 
 const Card = ({product}) =>{
-    const { cart, setCart } = React.useContext(CartContext);
+    const { 
+        cart, 
+        setCart,
+        quantifiedCart,
+        outOfStock,
+        setOutOfStock
+    } = React.useContext(CartContext);
     //Card states
     //is the product in stock?Toggle Cart button depending on answer
     const [isInStock, setisInStock] = React.useState('False')
@@ -32,12 +38,21 @@ function handleBubble(event) {
     event.preventDefault()
 }
 
-function handleAddToCart() {
+function handleAddToCart(id) {
+    let currentItem =  quantifiedCart.find(
+        currentitem => currentitem._id === id
+        )
+    if(currentItem){
+        if(currentItem.numInStock <= currentItem.quantity) {
+            setOutOfStock(true)
+            return
+        }
+    }
     setCart([...cart, product]);
 }
 
-function handleClick(event) {
-    handleAddToCart();
+function handleClick(event,id) {
+    handleAddToCart(id);
     handleBubble(event);
     
 }
@@ -49,7 +64,7 @@ function handleClick(event) {
         <ProductName >{product["name"]}</ProductName>
         <ProductPrice  onClick={handleBubble}>{product["price"]}</ProductPrice>
         {isInStock === "True" ? 
-        <Button onClick={ handleClick}>Add to Cart</Button>
+        <Button onClick={ (event)=>handleClick(event,product._id)}>Add to Cart</Button>
         :<Button disabled onClick={handleBubble}>Out of Stock</Button>}
     </CardWrapper>)
 };

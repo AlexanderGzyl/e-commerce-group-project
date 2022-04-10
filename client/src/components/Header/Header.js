@@ -27,6 +27,7 @@ const Nav = styled.div`
    background-color: var(--color-black);
    position: fixed;
    z-index: 40;
+   top: 0;
     }
 `
 
