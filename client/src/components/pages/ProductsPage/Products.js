@@ -1,42 +1,72 @@
 import React, { useEffect, useState } from "react"
-import styled from "styled-components";
-import {AiFillShopping} from "react-icons/ai"
+import styled, { keyframes } from "styled-components";
 import Card from "./Card"
-//confirm react icons version before commit
-//confirm change to products model
+import Pagination from "./Pagination"
+
 
 const Products = () => {
     const [products, setProducts] = useState([])
+    const [currentPage, setCurrentPage] = useState(1);
+    
     //on mount query the products and store them in state
     useEffect(() => {
-        fetch(`/products`)
-            .then((res) => res.json())
-            .then((json) => {
-            setProducts(json.data);
-            });
-    }, []);
+        fetch(`/products?page=${currentPage}`)
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          } else {
+            throw new Error(`Error! status: ${res.status}`);
+          }
+        })
+
+        .then((data) => {
+            setProducts(data.data);
+        });
+    }, [currentPage]);
+    
 
 return (
 <>
-    <Title>
-    Products Page<AiFillShopping style={{color: "#45A29E", fontSize: "26px", marginLeft:"10px"}}/>
-    </Title>
+    <AnimateTitle>
+    BROWSE PRODUCTS
+    </AnimateTitle>
     <Cards>
     {products.map((product)=>{
     return <Card key ={product["_id"]} product = {product}></Card>
     })}
     </Cards>
+    <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage}></Pagination>
 </>
 );
 };
 
 
+
+
 const Title = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items:center;
-    font-size: 26px;
-    margin-top: 70px;
+
+padding-bottom:2%;
+text-transform: uppercase;
+  background-image: linear-gradient(
+    45deg,
+    #66fcf1 0%,
+    #03635d 33%
+  );
+  display: flex;
+  justify-content: center;
+  text-align:center;
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 36px;
+`;
+const textclip = keyframes`
+to {
+    background-position: 200% center;
+  }
+`
+const AnimateTitle = styled(Title)`
+    animation: ${textclip} 2s linear 2;
 `;
 
 const Cards = styled.div`
@@ -44,7 +74,6 @@ display: flex;
 flex-wrap: wrap;
 align-items:center;
 justify-content: center;
-
 `;
 
 export default Products;
