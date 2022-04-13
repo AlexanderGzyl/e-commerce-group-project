@@ -77,6 +77,9 @@ const CartIcon = styled.img`
 `
 
 const CartText = styled.div`
+color: var(--color-cadetblue);
+font-size:26px;
+
   @media(min-width: 768px){
     display: none;
   }
@@ -112,8 +115,13 @@ position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
+    @media(max-width: 768px){
+      position: absolute;
+      top: 8px;
+      right: 165px;
+    }
 }
-}
+
 
    @media(max-width: 768px){
     flex-flow: column nowrap;
