@@ -11,7 +11,9 @@ const CheckOutProduct = ({cartItem})=>{
         setQuantifiedCart,
         totalCart
    } = React.useContext(CartContext);
+
    const navigation = useNavigate()
+   //user should confirm purchase
    const [confirmBtn,setConfirmBtn] = React.useState(false)
 //truncate large product names
     let productName = [""];
@@ -21,7 +23,7 @@ if (cartItem["name"].length>60) {
     productName = cartItem["name"]
 }
 
-//remove item
+//remove item function
 const removeInCart = id => {
     const newCart =  cart.filter(
      currentitem => currentitem._id !== id
@@ -32,7 +34,7 @@ const removeInCart = id => {
     setCart([...newCart])
     setQuantifiedCart([...newQuantifiedCart])
   }
-
+// update the cartorders if user removes item
   const checkout = () => {
     const CartOrders = {
       orders : [...quantifiedCart],
@@ -40,7 +42,7 @@ const removeInCart = id => {
     }
     navigation("/checkout", {state : CartOrders})
   }
-
+// confirm button handle
   const handleClick = (id) =>{
       removeInCart(id)
       checkout()
