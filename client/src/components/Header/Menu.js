@@ -25,7 +25,7 @@ const Menu = ({open}) => {
       <StyledNavLink to='/products'>Shop</StyledNavLink>
       </li>
       <li>
-        <StyledNavLink to='/about'>About</StyledNavLink>
+        <StyledNavLink to='/companies'>Our partners</StyledNavLink>
       </li>
       <li>
         <StyledNavLink to='/login'>Login</StyledNavLink>

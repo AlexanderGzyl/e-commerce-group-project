@@ -1,13 +1,13 @@
 import Products from './ProductsPage/Products'
 import Product from './Product'
-import About from './About'
+import Companies from './Companies'
 import Homepage from './Homepage'
 import Checkout from './Checkout'
 
 
 export {
  Homepage,
- About,
+ Companies,
  Checkout,
  Product,
  Products
