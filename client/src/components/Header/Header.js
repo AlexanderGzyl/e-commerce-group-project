@@ -25,6 +25,10 @@ const Nav = styled.div`
    border-bottom: 2px solid #f1f1f1;
    padding: 0 20px;
    background-color: var(--color-black);
+   position: fixed;
+   z-index: 40;
+   top: 0;
+    }
 `
 
 const LogoDiv = styled(NavLink)`
