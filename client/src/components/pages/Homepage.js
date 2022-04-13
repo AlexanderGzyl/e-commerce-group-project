@@ -10,7 +10,7 @@ const Homepage = () => {
       </HomeImageWrap>
       <TitleWrap>
         <Title>THE BEST PRICE,<br />THE BEST GADGET.</Title>
-        <Uppertitle>Fill your basket with our offer.</Uppertitle>
+        <Subtitle>Fill your basket with our offer.</Subtitle>
       </TitleWrap>
     </TextImage>
     <CtaWrap>
@@ -28,8 +28,13 @@ const Main = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 55px);
+  min-height: calc(100vh - 37px);
   background-image: url("background-wallpaper.jpg");
+  background-size: cover;
+  padding-top: 100px;
+  @media (max-width: 768px){
+    padding-top:40px;
+  };
 `
 
 const TextImage = styled.div`
@@ -39,8 +44,6 @@ const TextImage = styled.div`
   align-items: center; 
   width: 90%;
   gap: 30px;
-  
-
   @media (max-width: 768px){
     display: flex;
     flex-direction: column;
@@ -60,6 +63,9 @@ const HomeImageWrap = styled.div`
 `
 const HomepageImage = styled.img`
   width: 200px;
+  @media (max-width: 768px){
+    width: 130px;
+  }
 `
 
 const TitleWrap = styled.div`
@@ -76,7 +82,7 @@ const Title = styled.h1`
   }
 `;
 
-const Uppertitle = styled.h2`
+const Subtitle = styled.h2`
   padding-top: 10px;
   font-size: 32px;
   color: var(--color-lightgray);
