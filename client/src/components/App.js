@@ -10,6 +10,7 @@ Homepage,
 import Products from './pages/ProductsPage/Products'
 import Header from './Header/Header'
 import Companies from './pages/Companies';
+import Footer from './Footer/Footer';
 
 const App = () => {
 return (
@@ -24,6 +25,7 @@ return (
           <Route path="/product/:prodId" element={<Product/>}/>
           <Route path="/products" element={<Products/>} />
         </Routes>
+        <Footer/>
     </AppWrapper>
   </>
 

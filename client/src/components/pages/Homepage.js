@@ -28,7 +28,7 @@ const Main = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh);
+  min-height: calc(100vh - 37px);
   background-image: url("background-wallpaper.jpg");
   background-size: cover;
   padding-top: 100px;
