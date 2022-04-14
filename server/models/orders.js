@@ -1,14 +1,22 @@
 const mongoose = require('mongoose')
 const {Schema } = mongoose;
 
-// schema of model @ flight
+// schema of model @ order
 
 const companySchema = new Schema({
   email: {
    type: String,
    require: true
   },
-  name: {
+  phone: {
+   type: String,
+   require: true
+  },
+  fname: {
+   type: String,
+   require: true
+  },
+  lname: {
    type: String,
    require: true
   },
@@ -16,14 +24,30 @@ const companySchema = new Schema({
    type: String,
    require: true
   },
-  creditCard: {
+  postalcode: {
+   type: String,
+   require: true
+  },
+  country: {
+   type: String,
+   require: true
+  },
+  credit_card: {
+   type: String,
+   require: true
+  },
+  cvv: {
+   type: String,
+   require: true
+  },
+  TotalPrice: {
    type: String,
    require: true
   },
   items: [
    {
     _id: {
-       type: Number,
+       type: String,
        require: true
       },
       name: {
@@ -31,10 +55,14 @@ const companySchema = new Schema({
        require: true
       },
       price: {
-       type: Number,
+       type: String,
        require: true
       },  
       imageSrc: {
+       type: String,
+       require: true
+      },
+      body_location: {
        type: String,
        require: true
       },
@@ -42,14 +70,18 @@ const companySchema = new Schema({
         type: String,
         require: true
       },
+      category: {
+        type: String,
+        require: true
+      },
       quantity: {
-        type: Number,
+        type: String,
         require: true
       }
    }
   ]
 })
 
-// export of model @ flight
+// export of model @ order
 
-module.exports = mongoose.model('Company',companySchema)
+module.exports = mongoose.model('Order',companySchema)

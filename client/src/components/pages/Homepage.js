@@ -6,7 +6,7 @@ const Homepage = () => {
   <Main>
     <TextImage>
       <HomeImageWrap>
-        <HomepageImage alt="homepage image" src="home-image.png"></HomepageImage>
+        <HomepageImage alt="homepage image" src="/home-image.png"></HomepageImage>
       </HomeImageWrap>
       <TitleWrap>
         <Title>THE BEST PRICE,<br />THE BEST GADGET.</Title>

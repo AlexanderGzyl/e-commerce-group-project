@@ -26,9 +26,10 @@ express()
   })
   .use(morgan('tiny'))
   .use(express.static('./server/assets'))
-  .use(express.json())
-  .use(express.urlencoded({ extended: false }))
-  .use('/', express.static(__dirname + '/'))
+  
+  app.use(express.json())
+  app.use(express.urlencoded({ extended: false }))
+  app.use('/', express.static(__dirname + '/'))
   
   app.use(route)
 

@@ -1,17 +1,32 @@
 import React, { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import Loader from "../Loader/Loader"
 const Companies= () => {
+  const navigate = useNavigate()
   const [companies, setCompanies] = useState([])
     //on mount query of all companies and store them in state
     useEffect(() => {
         fetch(`/companies`)
             .then((res) => res.json())
-            .then((json) => {
-            setCompanies(json.data);
-            });
+            .then((response)=> {
+            if(response.status !== 200){
+                navigate('/')
+            }
+             setCompanies(response.data);
+            })
+            .catch(function() {
+             navigate('/error-page')
+        })
     }, []);
 
+  if(companies.length <= 0) {
+  return (
+    <LoaderWrapper>
+         <Loader />
+    </LoaderWrapper>
+  )
+}
   return (
     <>
         <Title>Our Partners</Title>
@@ -100,3 +115,10 @@ const PartnerCard = styled.div`
   }
 
 `
+ const LoaderWrapper = styled.div`
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+ `

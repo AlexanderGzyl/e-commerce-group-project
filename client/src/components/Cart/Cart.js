@@ -28,7 +28,7 @@ return (
    <CartItems>
     <div className="header">
      <h2>Cart</h2>
-      <img onClick={closeCart} alt="cart icon" src="close-icon.png"></img>
+      <img onClick={closeCart} alt="cart icon" src="/close-icon.png"></img>
     </div>
     <hr className="separate-lign" />
     <div className="products">
@@ -63,7 +63,6 @@ return (
                           <span>#{item._id}: </span>
                           <span>{item.price} x {item.quantity}qty</span>
                           <span> =  ${(item.price.substring(1) * item.quantity).toFixed(2)} </span>
-
                         </div>
                       ) 
                     })}

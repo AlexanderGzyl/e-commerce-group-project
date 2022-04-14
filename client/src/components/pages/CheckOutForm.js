@@ -1,11 +1,52 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CheckOutForm = ({})=>{
+const CheckOutForm = ({checkoutData})=>{
+  console.log(checkoutData)
+  const sanitizeOrders = checkoutData.orders.map((order)=> {
+     return {
+          _id : order._id,
+          name : order.name,
+          price:order.price,
+          imageSrc : order.imageSrc,
+          body_location : order.body_location,
+          companyId : order.companyId,
+          category : order.category,
+          quantity : order.quantity
+     }
+  })
+  const purchase = (e) => {
+    e.preventDefault()
+    const payload = {
+      email: e.target.email.value,
+      phone: e.target.phone.value,
+      fname: e.target.fname.value,
+      lname: e.target.lname.value,
+      address: e.target.address.value,
+      postalcode: e.target.postalcode.value,
+      country: e.target.country.value,
+      credit_card: e.target.credit.value,
+      expiration: e.target.expiration.value,
+      cvv: e.target.cvv.value,
+      items: [...sanitizeOrders, ], 
+      TotalPrice:checkoutData.totalPrice
+    }
+    fetch('/order', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: { "Content-Type": "application/json" },
+    })
+    .then(()=> {
+      console.log('thanks')
+    })
+    console.log('clicked',payload)
+  }
+
+
     return (
         <Wrapper>
             
-          <StyledForm >
+          <StyledForm onSubmit={(e) => purchase(e)}>
           <h2>Customer Information</h2>
             <StyledInput
               type="email"
@@ -14,7 +55,7 @@ const CheckOutForm = ({})=>{
             />
             <StyledInput
                type="text"
-              name="Phone"
+              name="phone"
               placeholder="Phone Number"
             />
             <h2>Shipping Information</h2>
@@ -30,7 +71,7 @@ const CheckOutForm = ({})=>{
             />
             <StyledInput
               type="text"
-              name="Address"
+              name="address"
               placeholder="Address"
             />
             <StyledInput
@@ -40,7 +81,7 @@ const CheckOutForm = ({})=>{
             />
             <StyledInput
               type="text"
-              name="Country"
+              name="country"
               placeholder="Country"
             />
             <h2>Purchasing Info</h2>
@@ -59,7 +100,7 @@ const CheckOutForm = ({})=>{
               name="cvv"
               placeholder="CVV"
             />
-              <Confirm type="submit">Purchase</Confirm>
+              <Confirm type="submit" >Purchase</Confirm>
           </StyledForm>
         </Wrapper>
       );

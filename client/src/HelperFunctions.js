@@ -18,3 +18,10 @@ return shoppingCart.reduce(function (previousValue, currentValue) {
   return previousValue + currentValue.quantity * currentValue.price.substring(1);
 }, 0);
 };
+export const CountInCart = (QuantifiedArray) => {
+const total =  QuantifiedArray.reduce(function (previousValue, currentValue) {
+  return previousValue + currentValue.quantity;
+}, 0);
+return total
+};
+

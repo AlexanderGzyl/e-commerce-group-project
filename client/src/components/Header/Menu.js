@@ -30,10 +30,9 @@ const Menu = ({open}) => {
       <li>
         <StyledNavLink to='/login'>Login</StyledNavLink>
       </li>
-      <li>
+      <li className="hide-mobile">
         <div onClick={displayCart} className="cart-wrapper">
-          <CartIcon alt="cart icon" src="shopping-cart.png"></CartIcon>
-          <CartText>Cart</CartText>
+          <CartIcon alt="cart icon" src="/shopping-cart.png"></CartIcon>
           <div className="cartCount">{cart.length}</div>
         </div>
       </li>
@@ -58,6 +57,7 @@ const CartWrapper = styled.div`
     overflow-y: auto;
     height: 100%;
     z-index: 999;
+    top: 0;
     padding: 10px;
     border-radius: 12px;
     box-shadow: 0px 0px 4px 1px #0000005c;
@@ -66,7 +66,13 @@ const CartWrapper = styled.div`
    }
    &::-webkit-scrollbar-thumb {
     background: #949494;
-}
+  }
+    @media(min-width: 768px){
+    display: none;
+  }
+
+
+  
 `
 const CartIcon = styled.img`
   width:20px;
@@ -76,14 +82,6 @@ const CartIcon = styled.img`
   }
 `
 
-const CartText = styled.div`
-color: var(--color-cadetblue);
-font-size:26px;
-
-  @media(min-width: 768px){
-    display: none;
-  }
-`
 
 const MenuWrapper = styled.ul`
    display: flex;
@@ -135,6 +133,9 @@ position: absolute;
     padding-top: 3.5rem;
     transform: ${({open}) => open ? 'translateX(0)' : 'translateX(100%)'};
     transition: transform 0.3s ease-in-out;
+    .hide-mobile{
+      display:none;
+    }
    }
 `
 

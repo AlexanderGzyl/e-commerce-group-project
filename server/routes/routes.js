@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const  Products = require('../models/products')
 const  Company = require('../models/companies')
+const Order = require('../models/orders')
 
 
   // add new endpoints here 👇
@@ -39,24 +40,25 @@ const  Company = require('../models/companies')
   // @desc get product by id
   // _____________________________________________
   // *********************************************
-  router.get('/product/:prodId', (req, res) => {  
+  router.get('/product/:prodId', async (req, res) => {  
     const id = req.params.prodId;
-    Products.findById(id)
-    .then(data => {
-        res.status(200).json(
+    const ProductData =  await Products.findById(id).lean()
+    const CompanyData = await Company.findById(ProductData.companyId).lean()
+    const data =  {...ProductData, company_name: CompanyData.name}
+    try {
+       res.status(200).json(
           { 
             status: 200, 
             data: data, 
             message: "success" 
           });
-      })
-      .catch(err => {
-        res.status(err).json(
+    } catch (err) {
+              res.status(err).json(
           { 
             status: err,  
             message: "error" 
           });
-      })
+    }
   })
 
   // @method GET
@@ -116,9 +118,43 @@ const  Company = require('../models/companies')
   // @desc save purchase
   // _____________________________________________
   // *********************************************
-  
+   
   // to be added
+  router.post('/order', (req, res) => {
+     console.log('samples',req.body)
+      const email = req.body.email
+      const phone = req.body.phone
+      const fname = req.body.fname
+      const lname = req.body.lname
+      const address = req.body.address
+      const postalcode = req.body.postalcode
+      const country = req.body.country
+      const credit_card = req.body.credit
+      const expiration = req.body.expiration
+      const cvv = req.body.cvv
+      const TotalPrice = req.body.TotalPrice
+      const items = req.body.items
+    
+    
 
+
+    const newOrder = new Order({email,phone,fname,lname,address,postalcode,country,credit_card,expiration,cvv,TotalPrice,items})
+    newOrder.save()
+    .then((err,doc) => {
+         if(err){
+            return res.status(401).json(
+            { 
+              status:401, 
+              message: "something went wrong. try again later!" 
+            })
+         }
+         res.status(200).json(
+            { 
+              status:200, 
+              message: "ok" 
+        })
+    })
+  })
 
   // *******************************************************************************************************
   // add new endpoints here ☝️
