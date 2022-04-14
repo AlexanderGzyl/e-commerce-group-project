@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react"
 import styled, { keyframes } from "styled-components";
+import { useNavigate } from "react-router-dom";
 import Card from "./Card"
 import Pagination from "./Pagination"
-
+import Loader from "../../Loader/Loader"
 
 const Products = () => {
     const [products, setProducts] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
+      const navigate = useNavigate()
     
     //on mount query the products and store them in state
     useEffect(() => {
@@ -18,13 +20,22 @@ const Products = () => {
             throw new Error(`Error! status: ${res.status}`);
           }
         })
-
         .then((data) => {
-            setProducts(data.data);
-        });
+            setProducts(data.data)
+        })
+        .catch(function() {
+             navigate('/error-page')
+        })
     }, [currentPage]);
     
-
+if(products.length <= 0) {
+  return (
+    <LoaderWrapper>
+         <Loader />
+    </LoaderWrapper>
+  )
+}
+     
 return (
 <>
     <AnimateTitle>
@@ -46,6 +57,7 @@ return (
 const Title = styled.div`
 
 padding-bottom:2%;
+    margin-top: 70px;
 text-transform: uppercase;
   background-image: linear-gradient(
     45deg,
@@ -75,5 +87,13 @@ flex-wrap: wrap;
 align-items:center;
 justify-content: center;
 `;
+
+ const LoaderWrapper = styled.div`
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+ `
 
 export default Products;

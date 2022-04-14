@@ -10,9 +10,7 @@ import styled from 'styled-components';
 const Checkout = () => {
  let location = useLocation();
  const checkoutData = location.state
- const myJSON = JSON.stringify(checkoutData);
- var jsonPretty = JSON.stringify(JSON.parse(myJSON),null,2); 
-
+ console.log(checkoutData)
 //pass the order data from checkout data to checkoutproduct component
  return (
      <>
@@ -24,7 +22,7 @@ const Checkout = () => {
     })}
     </CheckOutProducts>
     <TotalPrice>{`Total Price: ${checkoutData["totalPrice"]}`}</TotalPrice>
-    <CheckOutForm></CheckOutForm>
+    <CheckOutForm checkoutData={checkoutData}></CheckOutForm>
 </Wrapper>
   </>
  );

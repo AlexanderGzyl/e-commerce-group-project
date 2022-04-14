@@ -6,6 +6,7 @@ import Card from "../ProductsPage/Card";
 import { CartContext } from "../../../contexts/CartContext";
 
 const Product = () => {
+  const navigate = useNavigate()
   //retrieve parameters
   const { prodId } = useParams();
   // state defined for data error
@@ -17,7 +18,12 @@ const Product = () => {
   // purchased product quantity
   const [productQuantity, setProductQuantity] = useState(1);
   //add to cart
-  const { cart, setCart } = useContext(CartContext);
+  const { 
+    cart,
+    setCart,
+    quantifiedCart,
+    setOutOfStock
+  } = useContext(CartContext);
 
   //handle functions
   // incerase quantity function
@@ -49,8 +55,17 @@ const Product = () => {
       setIsAvailable(false);
     }
   };
-  const handleAddtoCart = () => {
-    setCart(product);
+  const handleAddtoCart = (id) => {
+        let currentItem =  quantifiedCart.find(
+        currentitem => currentitem._id === id
+        )
+    if(currentItem){
+        if(currentItem.numInStock <= currentItem.quantity) {
+            setOutOfStock(true)
+            return
+        }
+    }
+    setCart([...cart, product]);
   };
 
   //reade data from server
@@ -58,17 +73,19 @@ const Product = () => {
   useEffect(() => {
     fetch(`/product/${prodId}`)
       .then((res) => {
-        if (!res.ok) {
+        if (!res.status ==='200') {
           setError(true);
           throw Error("Server Error");
         }
         return res.json();
       })
-
       .then((res) => {
         setDataStatus("idle");
         setProduct(res.data);
-      });
+      })            
+      .catch(function() {
+             navigate('/error-page')
+        })
 
     return () => {
       setDataStatus("loading");
@@ -82,9 +99,14 @@ const Product = () => {
       .then((res) => res.json())
       .then((json) => {
         setProducts(json.data);
-      });
+      })
+      .catch(function() {
+             navigate('/error-page')
+        })
   }, []);
 
+
+console.log('product', product)
   //render
   return (
     <>
@@ -101,7 +123,7 @@ const Product = () => {
 
                   <ProductCompany>
                     <span style={{ color: "gray" }}>Sold By: </span>
-                    {product.companyId}
+                    {product.company_name}
                   </ProductCompany>
 
                   {product.numInStock > 0 ? (
@@ -113,9 +135,9 @@ const Product = () => {
                     </ProductPrice>
                   )}
 
-                  <ProductQuantityText>Quantity:</ProductQuantityText>
+                  {/* <ProductQuantityText>Quantity:</ProductQuantityText> */}
 
-                  <ProductQuantity>
+                  {/* <ProductQuantity>
                     <div className="component-quantity-input">
                       <QuantityButtonMinus onClick={handleDecrement}>
                         -
@@ -134,9 +156,9 @@ const Product = () => {
                         <></>
                       )}
                     </div>
-                  </ProductQuantity>
+                  </ProductQuantity> */}
                   <ProductAddButton>
-                    <AddtoCartButton onClick={handleAddtoCart} disabled={false}>
+                    <AddtoCartButton onClick={() => handleAddtoCart(product._id)} disabled={false}>
                       Add to Cart
                     </AddtoCartButton>
                   </ProductAddButton>
@@ -170,7 +192,9 @@ const Product = () => {
   );
 };
 const ProductWrapper = styled.div`
-  padding: 20px;
+    margin-top: 50px;
+    background-color: whitesmoke;
+    padding: 20px 0px;
   background-color: whitesmoke;
 
   .product-details {
@@ -207,6 +231,12 @@ const ProductImageWrapper = styled.div`
   width: 50%;
   background-color: whitesmoke;
   justify-content: center;
+  img {
+        border-radius: 10px;
+    padding: 5px;
+    background: #45a29e;
+    box-shadow: 0px 0px 8px 0px #000000b3;
+  }
 `;
 const InfoWrapper = styled.ul`
   width: 50%;
@@ -243,6 +273,11 @@ const AddtoCartButton = styled.button`
 const ProductName = styled.li`
   font-size: 28px;
   width: 75%;
+  @media (max-width: 768px) {
+    font-size: 19px;
+    margin: 0 auto;
+    font-weight: bold;
+  }
 `;
 const ProductPrice = styled.li`
   font-size: 28px;
@@ -302,4 +337,11 @@ const Span = styled.span`
   font-size: 12px;
   color: red;
 `;
+ const LoaderWrapper = styled.div`
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+ `
 export default Product;

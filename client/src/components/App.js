@@ -11,6 +11,7 @@ import Products from './pages/ProductsPage/Products'
 import Header from './Header/Header'
 import Companies from './pages/Companies';
 import Footer from './Footer/Footer';
+import ErrorPage from './error/error'
 
 const App = () => {
 return (
@@ -24,6 +25,7 @@ return (
           <Route path="/checkout" element={<Checkout/>} />
           <Route path="/product/:prodId" element={<Product/>}/>
           <Route path="/products" element={<Products/>} />
+          <Route path="/error-page" element={<ErrorPage/>} />
         </Routes>
         <Footer/>
     </AppWrapper>

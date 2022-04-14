@@ -13,60 +13,19 @@ const {
      setOutOfStock
 } = useContext(CartContext);
 
-// add item
-const addItem = (id) => {
+// select quantity
+const quantitySelected = (id,e) => {
+  e.preventDefault();
   let currentItem =  quantifiedCart.find(
    currentitem => currentitem._id === id
   )
-  if(currentItem.numInStock > currentItem.quantity) {
-   setOutOfStock(false)
-   currentItem.quantity += 1
-   if(currentItem.quantity > 1){
-    setDisableBtn(false)
-   }
-   setQuantifiedCart([...quantifiedCart])
-   setCart([...cart,currentItem])
-  }else{
-   setOutOfStock(true)
-  }
-}
-
-// remove item
-const removeItem = (id) => {
-  let currentItem =  quantifiedCart.find(
-   currentitem => currentitem._id === id
+  const newQuantifiedCart =quantifiedCart.filter(
+   currentitem => currentitem._id !== id
   )
-  if(currentItem.quantity > 1) {
-   setDisableBtn(false)
-   currentItem.quantity -= 1
-   if(currentItem.numInStock > currentItem.quantity){
-    setOutOfStock(false)
-   }
-   setQuantifiedCart([...quantifiedCart])
-
-   const newCart =  cart.filter(
-    item => item._id !== id
-   )
-   const cartCount = []
-   for(let i = 0; i < currentItem.quantity; i++){
-     const cartItem = {
-      body_location: currentItem.body_location,
-      category: currentItem.category,
-      companyId: currentItem.companyId,
-      imageSrc: currentItem.imageSrc,
-      name: currentItem.name,
-      numInStock: currentItem.numInStock,
-      price: currentItem.price,
-      _id: currentItem._id
-     }
-      cartCount.push(cartItem)
-   }
-   setCart([...newCart, ...cartCount])
-  }else{
-   setDisableBtn(true)
-  }
- 
+   currentItem.quantity = e.target.value
+   setQuantifiedCart([...newQuantifiedCart,currentItem])
 }
+
 
 const removeInCart = id => {
   const newCart =  cart.filter(
@@ -98,18 +57,12 @@ const removeInCart = id => {
         {cartItem.price} 
        </div>
        <div className="quantity">
-         <span>
-           <span className="times">X</span>
-           {cartItem.quantity}
-           </span>
-         <button 
-         onClick={() => addItem(cartItem._id)} 
-         className={outOfStock ? 'add disabled' : 'add'}
-         >+</button>
-         <button 
-         onClick={() => removeItem(cartItem._id)} 
-         className={disableBtn ? 'minus disabled' : 'minus'}
-         >-</button>
+            <select className="select-form" defaultValue="default" name="flight" id="selectQuantity" onChange={(e) => quantitySelected(cartItem._id,e)}>
+                <option value="default" disabled >{cartItem.quantity}</option>
+                  {Array.from({ length: cartItem.numInStock }, (_, i) => i + 1).map(count => 
+                      <option className="options" key={count} value={count}  >{count}</option>
+                  )}
+           </select>
        </div>
        <button onClick={() =>removeInCart(cartItem._id)}className="remove">
         remove
@@ -129,6 +82,12 @@ const CartWrapper = styled.div`
         background: white;
     border-radius: 10px;
     padding: 10px;
+}
+select#selectQuantity {
+    border-radius: 7px;
+    border: none;
+    background: #45a29e;
+    padding: 3px 4px;
 }
 .info-container img {
     width: 65px;
@@ -152,7 +111,6 @@ span.times {
     justify-content: center;
     align-items: center;
     gap: 0px 5px;
-    background: #ffffff;
     padding: 0px 3px;
     border-radius: 3px;
 }

@@ -21,14 +21,13 @@ export default Burger;
 const StyledBurger = styled.div`
   width: 2rem;
   height: 2rem;
-  position: fixed;
-  top: 10px;
   right: 20px;
   z-index: 50;
   display: none;
 
   @media(max-width: 768px){
     display: flex;
+    position: relative;
     justify-content: space-around;
     flex-flow: column nowrap;
   }

@@ -9,7 +9,7 @@ const Card = ({product}) =>{
         cart, 
         setCart,
         quantifiedCart,
-        outOfStock,
+        setQuantifiedCart,
         setOutOfStock
     } = React.useContext(CartContext);
     //Card states
@@ -45,11 +45,13 @@ function handleAddToCart(id) {
         currentitem => currentitem._id === id
         )
     if(currentItem){
+
         if(currentItem.numInStock <= currentItem.quantity) {
             setOutOfStock(true)
             return
         }
     }
+    console.log('added')
     setCart([...cart, product]);
 }
 
@@ -93,6 +95,9 @@ width:200px;
 /* box-shadow: 4px 4px 10px 4px #888888; */
 border: 2px solid var(--color-lightgray);
 border-radius:10px;
+  @media(max-width: 768px){
+    width:80%;
+  }
 `;
 const ProductImage = styled.img`
 width:100px;
