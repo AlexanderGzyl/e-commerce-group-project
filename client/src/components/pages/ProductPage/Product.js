@@ -106,7 +106,6 @@ const Product = () => {
   }, []);
 
 
-console.log('product', product)
   //render
   return (
     <>
@@ -134,29 +133,6 @@ console.log('product', product)
                       <Span> Item not available</Span>
                     </ProductPrice>
                   )}
-
-                  {/* <ProductQuantityText>Quantity:</ProductQuantityText> */}
-
-                  {/* <ProductQuantity>
-                    <div className="component-quantity-input">
-                      <QuantityButtonMinus onClick={handleDecrement}>
-                        -
-                      </QuantityButtonMinus>
-                      <QuantityField
-                        type="text"
-                        value={productQuantity}
-                        onChange={handleChange}
-                      />
-                      <QuantityButtonPlus onClick={handleIncrement}>
-                        +
-                      </QuantityButtonPlus>
-                      {!isAvailable ? (
-                        <Span> We have only {product.numInStock} left!</Span>
-                      ) : (
-                        <></>
-                      )}
-                    </div>
-                  </ProductQuantity> */}
                   <ProductAddButton>
                     <AddtoCartButton onClick={() => handleAddtoCart(product._id)} disabled={false}>
                       Add to Cart

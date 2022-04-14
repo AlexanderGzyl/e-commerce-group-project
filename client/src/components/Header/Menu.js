@@ -3,9 +3,11 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import Cart from '../Cart/Cart'
 import {CartContext} from "../../contexts/CartContext"
+import {AppContext} from "../../contexts/AppContext"
 
 
 const Menu = ({open}) => {
+ const {auth} = useContext(AppContext)
  const { 
   cart,
   showCart,
@@ -27,9 +29,20 @@ const Menu = ({open}) => {
       <li>
         <StyledNavLink to='/companies'>Our partners</StyledNavLink>
       </li>
-      <li>
-        <StyledNavLink to='/login'>Login</StyledNavLink>
-      </li>
+      {
+        !auth && (
+          <li>
+            <StyledNavLink to='/login'>Login</StyledNavLink>
+          </li>
+        )
+      }
+      {
+        auth && (
+          <li>
+            <StyledNavLink to='/admin'>Admin</StyledNavLink>
+          </li>
+        )
+      }
       <li className="hide-mobile">
         <div onClick={displayCart} className="cart-wrapper">
           <CartIcon alt="cart icon" src="/shopping-cart.png"></CartIcon>

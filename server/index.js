@@ -5,6 +5,8 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const app = express();
 const route = require('./routes/routes');
+const cookieParser = require("cookie-parser");
+const Auth = require('./auth')
 
 
 //constants
@@ -28,9 +30,11 @@ express()
   .use(express.static('./server/assets'))
   
   app.use(express.json())
+  app.use(cookieParser());
   app.use(express.urlencoded({ extended: false }))
   app.use('/', express.static(__dirname + '/'))
-  
+  // initialize express-session 
+  app.use(Auth)
   app.use(route)
 
     // connect initially while catching errors
