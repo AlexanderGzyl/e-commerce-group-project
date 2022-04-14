@@ -10,14 +10,12 @@ import styled from 'styled-components';
 const Checkout = () => {
  let location = useLocation();
  const checkoutData = location.state
- console.log(checkoutData)
 //pass the order data from checkout data to checkoutproduct component
  return (
      <>
 <Wrapper>
-<CheckOutProducts>
-{checkoutData["orders"].map((order)=>{
-    console.log(order["_id"])
+    <CheckOutProducts>
+    {checkoutData["orders"].map((order)=>{
     return <CheckOutProduct key ={order["_id"]} cartItem={order}></CheckOutProduct>
     })}
     </CheckOutProducts>

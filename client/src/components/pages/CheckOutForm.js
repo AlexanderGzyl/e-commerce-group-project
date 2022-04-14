@@ -1,8 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
+import {CartContext} from "../../contexts/CartContext"
+
 
 const CheckOutForm = ({checkoutData})=>{
-  console.log(checkoutData)
+  const { 
+     setCart,
+     setQuantifiedCart,
+} = useContext(CartContext);
+  const navigate = useNavigate()
   const sanitizeOrders = checkoutData.orders.map((order)=> {
      return {
           _id : order._id,
@@ -37,9 +44,10 @@ const CheckOutForm = ({checkoutData})=>{
       headers: { "Content-Type": "application/json" },
     })
     .then(()=> {
-      console.log('thanks')
+      setCart([])
+       setQuantifiedCart([])
+       navigate('/thank-you')
     })
-    console.log('clicked',payload)
   }
 
 

@@ -51,7 +51,6 @@ function handleAddToCart(id) {
             return
         }
     }
-    console.log('added')
     setCart([...cart, product]);
 }
 
