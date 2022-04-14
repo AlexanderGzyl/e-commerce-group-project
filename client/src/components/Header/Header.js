@@ -53,12 +53,19 @@ const Nav = styled.div`
    align-items: center;
    z-index: 40;
    top: 0;
+   .cart-wrapper{
+     margin-top:4px;
+   }
    @media (max-width: 768px){
       padding: 0px !important;
+      }
    }
    .cart-wrapper.small {
     position: relative;
-    margin-top: 10px;
+    margin-top: 15px;
+    margin-right: 10px;
+    padding-right: 20px;
+   
     
     &:hover{
       cursor: pointer;
@@ -71,7 +78,7 @@ const Nav = styled.div`
     position: absolute;
     color: #ffffff;
     padding: 13px;
-    top: -15px;
+    top: -13px;
     right: -19px;
     border-radius: 50%;
     background: #45a29e;
@@ -81,6 +88,10 @@ const Nav = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    @media (max-width: 768px){
+      right: -1px;
+      top: -16px;
+   }
 }
 `
 const CartWrapper = styled.div`
@@ -108,7 +119,7 @@ const LogoDiv = styled(NavLink)`
    padding: 10px;
 
    @media (max-width: 768px){
-      padding: 10px 0px;
+      padding: 10px 0px 0px 10px;
    }
 `;
 
