@@ -2,7 +2,7 @@
 ![homepage](https://user-images.githubusercontent.com/50504143/173117242-eac3efc5-6d7f-44e3-8fc9-70d1b70dd80d.jpg)
 
 ## Goal
-The goal of this project is to build from scratch a fully functional e-commerce store. A big part of the project was learning how to code in a team. Good communication was key to our success.
+The goal of this project is to build from scratch a fully functional e-commerce store. A big part of the project was learning how to code in a team. Good communication was key to our success. We achieved this using Discord, Trello and pair programming. 
 
 ## Tech stack
 MongoDB, Mongoose, React, Node.Js and Express
